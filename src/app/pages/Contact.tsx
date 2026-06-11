@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { SEO } from "../components/SEO";
-import { faqs } from "../data";
+import { useCMS } from "../context/CMSContext";
 import { Mail, Phone, MapPin, MessageCircle, ChevronDown, ArrowRight } from "lucide-react";
 
 const fadeUp = {
@@ -36,19 +36,19 @@ function ContactForm() {
         animate={{ opacity: 1, scale: 1 }}
         className="text-center py-20"
       >
-        <div className="w-16 h-16 border border-[#8F9E92] flex items-center justify-center mx-auto mb-8">
+        <div className="w-16 h-16 border border-[var(--color-accent-secondary)] flex items-center justify-center mx-auto mb-8">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M5 12l5 5L19 7" stroke="#8F9E92" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M5 12l5 5L19 7" stroke="var(--color-accent-secondary)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </div>
         <h3
-          className="text-[#2D2D2D] mb-4"
+          className="text-[var(--color-text-primary)] mb-4"
           style={{ fontFamily: "'Playfair Display', serif", fontWeight: 600, fontSize: "1.6rem" }}
         >
           Your Story Begins Here
         </h3>
         <p
-          className="text-[#2D2D2D]/55 max-w-sm mx-auto text-[14px] leading-relaxed"
+          className="text-[var(--color-text-primary)]/55 max-w-sm mx-auto text-[14px] leading-relaxed"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           We've received your enquiry and will reach out within 24 hours to begin crafting your journey.
@@ -62,7 +62,7 @@ function ContactForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
           <label
-            className="block text-[11px] tracking-[0.2em] uppercase text-[#2D2D2D]/50 mb-2"
+            className="block text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-primary)]/50 mb-2"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             Full Name *
@@ -72,14 +72,14 @@ function ContactForm() {
             value={form.name}
             onChange={handleChange}
             required
-            className="w-full bg-transparent border-b border-[#2D2D2D]/20 py-3 text-[14px] text-[#2D2D2D] placeholder-[#2D2D2D]/30 focus:outline-none focus:border-[#2D2D2D] transition-colors"
+            className="w-full bg-transparent border-b border-[var(--color-text-primary)]/20 py-3 text-[14px] text-[var(--color-text-primary)] placeholder-[var(--color-text-primary)]/30 focus:outline-none focus:border-[var(--color-text-primary)] transition-colors"
             style={{ fontFamily: "'Inter', sans-serif" }}
             placeholder="Your name"
           />
         </div>
         <div>
           <label
-            className="block text-[11px] tracking-[0.2em] uppercase text-[#2D2D2D]/50 mb-2"
+            className="block text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-primary)]/50 mb-2"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             Email Address *
@@ -90,7 +90,7 @@ function ContactForm() {
             value={form.email}
             onChange={handleChange}
             required
-            className="w-full bg-transparent border-b border-[#2D2D2D]/20 py-3 text-[14px] text-[#2D2D2D] placeholder-[#2D2D2D]/30 focus:outline-none focus:border-[#2D2D2D] transition-colors"
+            className="w-full bg-transparent border-b border-[var(--color-text-primary)]/20 py-3 text-[14px] text-[var(--color-text-primary)] placeholder-[var(--color-text-primary)]/30 focus:outline-none focus:border-[var(--color-text-primary)] transition-colors"
             style={{ fontFamily: "'Inter', sans-serif" }}
             placeholder="your@email.com"
           />
@@ -100,7 +100,7 @@ function ContactForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
           <label
-            className="block text-[11px] tracking-[0.2em] uppercase text-[#2D2D2D]/50 mb-2"
+            className="block text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-primary)]/50 mb-2"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             Phone Number
@@ -109,14 +109,14 @@ function ContactForm() {
             name="phone"
             value={form.phone}
             onChange={handleChange}
-            className="w-full bg-transparent border-b border-[#2D2D2D]/20 py-3 text-[14px] text-[#2D2D2D] placeholder-[#2D2D2D]/30 focus:outline-none focus:border-[#2D2D2D] transition-colors"
+            className="w-full bg-transparent border-b border-[var(--color-text-primary)]/20 py-3 text-[14px] text-[var(--color-text-primary)] placeholder-[var(--color-text-primary)]/30 focus:outline-none focus:border-[var(--color-text-primary)] transition-colors"
             style={{ fontFamily: "'Inter', sans-serif" }}
             placeholder="+91 98765 43210"
           />
         </div>
         <div>
           <label
-            className="block text-[11px] tracking-[0.2em] uppercase text-[#2D2D2D]/50 mb-2"
+            className="block text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-primary)]/50 mb-2"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             Preferred Destination
@@ -125,7 +125,7 @@ function ContactForm() {
             name="destination"
             value={form.destination}
             onChange={handleChange}
-            className="w-full bg-transparent border-b border-[#2D2D2D]/20 py-3 text-[14px] text-[#2D2D2D] focus:outline-none focus:border-[#2D2D2D] transition-colors appearance-none"
+            className="w-full bg-transparent border-b border-[var(--color-text-primary)]/20 py-3 text-[14px] text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-text-primary)] transition-colors appearance-none"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             <option value="">Select a region</option>
@@ -142,7 +142,7 @@ function ContactForm() {
 
       <div>
         <label
-          className="block text-[11px] tracking-[0.2em] uppercase text-[#2D2D2D]/50 mb-2"
+          className="block text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-primary)]/50 mb-2"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           Intended Travel Date
@@ -152,14 +152,14 @@ function ContactForm() {
           type="month"
           value={form.travelDate}
           onChange={handleChange}
-          className="w-full bg-transparent border-b border-[#2D2D2D]/20 py-3 text-[14px] text-[#2D2D2D] focus:outline-none focus:border-[#2D2D2D] transition-colors"
+          className="w-full bg-transparent border-b border-[var(--color-text-primary)]/20 py-3 text-[14px] text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-text-primary)] transition-colors"
           style={{ fontFamily: "'Inter', sans-serif" }}
         />
       </div>
 
       <div>
         <label
-          className="block text-[11px] tracking-[0.2em] uppercase text-[#2D2D2D]/50 mb-2"
+          className="block text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-primary)]/50 mb-2"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           Tell Us Your Story *
@@ -170,7 +170,7 @@ function ContactForm() {
           onChange={handleChange}
           required
           rows={5}
-          className="w-full bg-transparent border-b border-[#2D2D2D]/20 py-3 text-[14px] text-[#2D2D2D] placeholder-[#2D2D2D]/30 focus:outline-none focus:border-[#2D2D2D] transition-colors resize-none"
+          className="w-full bg-transparent border-b border-[var(--color-text-primary)]/20 py-3 text-[14px] text-[var(--color-text-primary)] placeholder-[var(--color-text-primary)]/30 focus:outline-none focus:border-[var(--color-text-primary)] transition-colors resize-none"
           style={{ fontFamily: "'Inter', sans-serif" }}
           placeholder="What kind of journey are you dreaming of? Any specific experiences, places, or feelings you want to capture?"
         />
@@ -178,7 +178,7 @@ function ContactForm() {
 
       <button
         type="submit"
-        className="group flex items-center gap-3 bg-[#2D2D2D] text-white px-8 py-4 text-[12px] tracking-[0.25em] uppercase hover:bg-[#D8C7A1] hover:text-[#2D2D2D] transition-all duration-300 mt-4"
+        className="group flex items-center gap-3 bg-[var(--color-text-primary)] text-white px-8 py-4 text-[12px] tracking-[0.25em] uppercase hover:bg-[var(--color-accent-primary)] hover:text-[var(--color-text-primary)] transition-all duration-300 mt-4"
         style={{ fontFamily: "'Inter', sans-serif" }}
       >
         Send My Enquiry
@@ -197,21 +197,21 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.08 }}
-      className="border-b border-[#2D2D2D]/10"
+      className="border-b border-[var(--color-text-primary)]/10"
     >
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between py-6 text-left group"
       >
         <span
-          className="text-[#2D2D2D] text-[15px] group-hover:text-[#8F9E92] transition-colors duration-200"
+          className="text-[var(--color-text-primary)] text-[15px] group-hover:text-[var(--color-accent-secondary)] transition-colors duration-200"
           style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
         >
           {q}
         </span>
         <ChevronDown
           size={16}
-          className={`text-[#8F9E92] flex-shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+          className={`text-[var(--color-accent-secondary)] flex-shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
         />
       </button>
       <AnimatePresence>
@@ -224,7 +224,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
             className="overflow-hidden"
           >
             <p
-              className="text-[#2D2D2D]/60 text-[14px] leading-relaxed pb-6"
+              className="text-[var(--color-text-primary)]/60 text-[14px] leading-relaxed pb-6"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               {a}
@@ -237,6 +237,11 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
 }
 
 export default function Contact() {
+  const { content } = useCMS();
+  const faqs = content.faqsData;
+  const contactData = content.contactPage;
+  const globalData = content.global;
+
   return (
     <>
       <SEO
@@ -246,14 +251,14 @@ export default function Contact() {
       />
 
       {/* Hero */}
-      <section className="relative pt-40 pb-24 px-6 lg:px-10 bg-[#FAF8F4] overflow-hidden">
+      <section className="relative pt-40 pb-24 px-6 lg:px-10 bg-[var(--color-bg)] overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full opacity-30 pointer-events-none">
           <img
             src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=900&h=800&fit=crop&auto=format"
             alt=""
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-l from-transparent to-[#FAF8F4]" />
+          <div className="absolute inset-0 bg-gradient-to-l from-transparent to-[var(--color-bg)]" />
         </div>
         <motion.div
           initial="hidden"
@@ -264,15 +269,15 @@ export default function Contact() {
           <motion.p
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="text-[11px] tracking-[0.35em] uppercase text-[#8F9E92] mb-5"
+            className="text-[11px] tracking-[0.35em] uppercase text-[var(--color-accent-secondary)] mb-5"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            Begin Your Journey
+            {contactData.heroSubtitle}
           </motion.p>
           <motion.h1
             variants={fadeUp}
             transition={{ duration: 0.8 }}
-            className="text-[#2D2D2D] max-w-2xl"
+            className="text-[var(--color-text-primary)] max-w-2xl"
             style={{
               fontFamily: "'Playfair Display', serif",
               fontWeight: 700,
@@ -280,15 +285,20 @@ export default function Contact() {
               lineHeight: 1.1,
             }}
           >
-            Every Great Story
-            <br />
-            <em className="text-[#8F9E92]">Starts with a Conversation</em>
+            {contactData.heroTitle}
           </motion.h1>
+          <motion.p
+            variants={fadeUp}
+            transition={{ duration: 0.9 }}
+            className="text-[var(--color-text-primary)]/70 max-w-2xl mt-6 text-lg"
+          >
+            {contactData.heroDescription}
+          </motion.p>
         </motion.div>
       </section>
 
       {/* Main Content */}
-      <section className="bg-[#FAF8F4] pb-28 px-6 lg:px-10">
+      <section className="bg-[var(--color-bg)] pb-28 px-6 lg:px-10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
           {/* Form */}
           <motion.div
@@ -297,7 +307,7 @@ export default function Contact() {
             transition={{ duration: 0.7 }}
           >
             <h2
-              className="text-[#2D2D2D] mb-10"
+              className="text-[var(--color-text-primary)] mb-10"
               style={{ fontFamily: "'Playfair Display', serif", fontWeight: 600, fontSize: "1.8rem" }}
             >
               Plan Your Journey
@@ -313,9 +323,9 @@ export default function Contact() {
             className="space-y-10"
           >
             {/* WhatsApp CTA */}
-            <div className="bg-[#2D2D2D] p-8">
+            <div className="bg-[var(--color-text-primary)] p-8">
               <p
-                className="text-[11px] tracking-[0.3em] uppercase text-[#8F9E92] mb-3"
+                className="text-[11px] tracking-[0.3em] uppercase text-[var(--color-accent-secondary)] mb-3"
                 style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 Prefer to chat?
@@ -330,7 +340,7 @@ export default function Contact() {
                 href="https://wa.me/919876543210"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 bg-[#D8C7A1] text-[#2D2D2D] px-6 py-3 text-[12px] tracking-[0.2em] uppercase hover:bg-white transition-all duration-300"
+                className="group inline-flex items-center gap-3 bg-[var(--color-accent-primary)] text-[var(--color-text-primary)] px-6 py-3 text-[12px] tracking-[0.2em] uppercase hover:bg-white transition-all duration-300"
                 style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 <MessageCircle size={14} />
@@ -341,71 +351,70 @@ export default function Contact() {
             {/* Contact Details */}
             <div className="space-y-6">
               <div className="flex gap-5 items-start">
-                <div className="w-10 h-10 border border-[#E8EBEC] flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Mail size={14} className="text-[#8F9E92]" />
+                <div className="w-10 h-10 border border-[var(--color-bg-light)] flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Mail size={14} className="text-[var(--color-accent-secondary)]" />
                 </div>
                 <div>
                   <p
-                    className="text-[11px] tracking-[0.2em] uppercase text-[#8F9E92] mb-1"
+                    className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-accent-secondary)] mb-1"
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
                     Email
                   </p>
                   <a
-                    href="mailto:hello@routestory.in"
-                    className="text-[#2D2D2D] text-[15px] hover:text-[#8F9E92] transition-colors"
+                    href={`mailto:${globalData.contactEmail}`}
+                    className="text-[var(--color-text-primary)] text-[15px] hover:text-[var(--color-accent-secondary)] transition-colors"
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
-                    hello@routestory.in
+                    {globalData.contactEmail}
                   </a>
                 </div>
               </div>
 
               <div className="flex gap-5 items-start">
-                <div className="w-10 h-10 border border-[#E8EBEC] flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Phone size={14} className="text-[#8F9E92]" />
+                <div className="w-10 h-10 border border-[var(--color-bg-light)] flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Phone size={14} className="text-[var(--color-accent-secondary)]" />
                 </div>
                 <div>
                   <p
-                    className="text-[11px] tracking-[0.2em] uppercase text-[#8F9E92] mb-1"
+                    className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-accent-secondary)] mb-1"
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
                     Phone
                   </p>
                   <a
-                    href="tel:+919876543210"
-                    className="text-[#2D2D2D] text-[15px] hover:text-[#8F9E92] transition-colors"
+                    href={`tel:${globalData.contactPhone.replace(/\s/g, '')}`}
+                    className="text-[var(--color-text-primary)] text-[15px] hover:text-[var(--color-accent-secondary)] transition-colors"
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
-                    +91 98765 43210
+                    {globalData.contactPhone}
                   </a>
                 </div>
               </div>
 
               <div className="flex gap-5 items-start">
-                <div className="w-10 h-10 border border-[#E8EBEC] flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <MapPin size={14} className="text-[#8F9E92]" />
+                <div className="w-10 h-10 border border-[var(--color-bg-light)] flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <MapPin size={14} className="text-[var(--color-accent-secondary)]" />
                 </div>
                 <div>
                   <p
-                    className="text-[11px] tracking-[0.2em] uppercase text-[#8F9E92] mb-1"
+                    className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-accent-secondary)] mb-1"
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
                     Office
                   </p>
                   <p
-                    className="text-[#2D2D2D] text-[14px] leading-relaxed"
+                    className="text-[var(--color-text-primary)] text-[14px] leading-relaxed"
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
-                    Route Story, 14 Lodhi Colony<br />
-                    New Delhi — 110003
+                    {globalData.contactAddress}
                   </p>
                 </div>
               </div>
             </div>
 
             {/* Map */}
-            <div className="aspect-video bg-[#E8EBEC] overflow-hidden">
+            <div className="aspect-video bg-[var(--color-bg-light)] overflow-hidden">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3504.2!2d77.2300!3d28.5900!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDM1JzI0LjAiTiA3N8KwMTMnNDguMCJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                 width="100%"
@@ -422,7 +431,7 @@ export default function Contact() {
       </section>
 
       {/* FAQ */}
-      <section className="bg-[#E8EBEC] py-28 px-6 lg:px-10">
+      <section className="bg-[var(--color-bg-light)] py-28 px-6 lg:px-10">
         <div className="max-w-3xl mx-auto">
           <motion.div
             initial="hidden"
@@ -434,7 +443,7 @@ export default function Contact() {
             <motion.p
               variants={fadeUp}
               transition={{ duration: 0.6 }}
-              className="text-[11px] tracking-[0.35em] uppercase text-[#8F9E92] mb-5"
+              className="text-[11px] tracking-[0.35em] uppercase text-[var(--color-accent-secondary)] mb-5"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               Frequently Asked
@@ -442,7 +451,7 @@ export default function Contact() {
             <motion.h2
               variants={fadeUp}
               transition={{ duration: 0.7 }}
-              className="text-[#2D2D2D]"
+              className="text-[var(--color-text-primary)]"
               style={{
                 fontFamily: "'Playfair Display', serif",
                 fontWeight: 700,

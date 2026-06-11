@@ -1,10 +1,13 @@
 import { Link } from "react-router";
 import { Instagram, Twitter, Facebook, Youtube, Mail } from "lucide-react";
 import { useState } from "react";
+import { useCMS } from "../context/CMSContext";
 
 export function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const { content } = useCMS();
+  const globalData = content.global;
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,7 +18,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#2D2D2D] text-white">
+    <footer className="bg-[var(--color-text-primary)] text-white">
       {/* Top Bar */}
       <div className="border-b border-white/10 py-16 px-6 lg:px-10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -26,14 +29,14 @@ export function Footer() {
                 className="text-xl tracking-widest uppercase text-white"
                 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
               >
-                Route Story
+                {globalData.logoText}
               </span>
-              <p className="text-[10px] tracking-[0.3em] uppercase text-[#8F9E92] mt-1">
-                Every Journey Has a Story
+              <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-accent-secondary)] mt-1">
+                {globalData.logoSubtext}
               </p>
             </div>
             <p className="text-sm text-white/50 leading-relaxed mt-5 max-w-xs">
-              We craft immersive journeys across India — from the Himalayas to the backwaters, from ancient cities to secret coastlines.
+              {globalData.footerDescription}
             </p>
             <div className="flex gap-4 mt-6">
               {[Instagram, Twitter, Facebook, Youtube].map((Icon, i) => (
@@ -50,7 +53,7 @@ export function Footer() {
           {/* Company */}
           <div>
             <h4
-              className="text-[11px] tracking-[0.3em] uppercase text-[#8F9E92] mb-6"
+              className="text-[11px] tracking-[0.3em] uppercase text-[var(--color-accent-secondary)] mb-6"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               Company
@@ -78,7 +81,7 @@ export function Footer() {
           {/* Destinations */}
           <div>
             <h4
-              className="text-[11px] tracking-[0.3em] uppercase text-[#8F9E92] mb-6"
+              className="text-[11px] tracking-[0.3em] uppercase text-[var(--color-accent-secondary)] mb-6"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               Destinations
@@ -100,7 +103,7 @@ export function Footer() {
           {/* Newsletter */}
           <div>
             <h4
-              className="text-[11px] tracking-[0.3em] uppercase text-[#8F9E92] mb-6"
+              className="text-[11px] tracking-[0.3em] uppercase text-[var(--color-accent-secondary)] mb-6"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               Stay Inspired
@@ -109,7 +112,7 @@ export function Footer() {
               Travel stories, seasonal guides, and curated ideas — direct to your inbox.
             </p>
             {subscribed ? (
-              <p className="text-sm text-[#8F9E92]">Thank you for subscribing.</p>
+              <p className="text-sm text-[var(--color-accent-secondary)]">Thank you for subscribing.</p>
             ) : (
               <form onSubmit={handleSubscribe} className="flex flex-col gap-3">
                 <input
@@ -118,11 +121,11 @@ export function Footer() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com"
                   required
-                  className="bg-transparent border border-white/20 px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#D8C7A1] transition-colors"
+                  className="bg-transparent border border-white/20 px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[var(--color-accent-primary)] transition-colors"
                 />
                 <button
                   type="submit"
-                  className="flex items-center gap-2 text-[12px] tracking-[0.2em] uppercase text-[#D8C7A1] hover:text-white transition-colors"
+                  className="flex items-center gap-2 text-[12px] tracking-[0.2em] uppercase text-[var(--color-accent-primary)] hover:text-white transition-colors"
                 >
                   <Mail size={13} />
                   Subscribe

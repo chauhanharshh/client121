@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router";
-import { motion, useScroll, useTransform } from "motion/react";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
+import { ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { SEO } from "../components/SEO";
-import { featuredJourneys, testimonials } from "../data";
+import { useCMS } from "../context/CMSContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -11,6 +11,9 @@ const fadeUp = {
 };
 
 function HeroSection() {
+  const { content } = useCMS();
+  const heroData = content.home.hero;
+  
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const yImg = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
@@ -21,11 +24,11 @@ function HeroSection() {
       {/* Parallax Image */}
       <motion.div className="absolute inset-0" style={{ y: yImg }}>
         <img
-          src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1800&h=1200&fit=crop&auto=format"
+          src={heroData.image}
           alt="India — Himalayas, Rajasthan, Kerala and beyond"
           className="w-full h-full object-cover scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/20 to-black/55" />
       </motion.div>
 
       {/* Content */}
@@ -37,10 +40,10 @@ function HeroSection() {
           initial={{ opacity: 0, letterSpacing: "0.5em" }}
           animate={{ opacity: 1, letterSpacing: "0.35em" }}
           transition={{ duration: 1.2, delay: 0.3 }}
-          className="text-[11px] tracking-[0.35em] uppercase text-[#D8C7A1] mb-8"
+          className="text-[11px] tracking-[0.35em] uppercase text-[var(--color-accent-primary)] mb-8"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
-          Premium Travel Experiences · India
+          {heroData.subtitle}
         </motion.p>
 
         <motion.h1
@@ -55,9 +58,9 @@ function HeroSection() {
             lineHeight: 1.1,
           }}
         >
-          Discover India Through
+          {heroData.title1}
           <br />
-          <em className="not-italic text-[#D8C7A1]">Stories</em>, Not Just Destinations
+          <em className="not-italic text-[var(--color-accent-primary)]">{heroData.titleHighlight}</em>{heroData.title2}
         </motion.h1>
 
         <motion.p
@@ -67,8 +70,7 @@ function HeroSection() {
           className="text-white/70 max-w-2xl mx-auto leading-relaxed mb-12"
           style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(0.9rem, 1.5vw, 1.1rem)" }}
         >
-          Curated journeys across mountains, deserts, forests, beaches, heritage cities,
-          sacred destinations, and hidden gems.
+          {heroData.description}
         </motion.p>
 
         <motion.div
@@ -79,7 +81,7 @@ function HeroSection() {
         >
           <Link
             to="/customize"
-            className="group flex items-center gap-3 bg-white text-[#2D2D2D] px-8 py-4 text-[12px] tracking-[0.2em] uppercase hover:bg-[#D8C7A1] transition-all duration-300"
+            className="group flex items-center gap-3 bg-white text-[var(--color-text-primary)] px-8 py-4 text-[12px] tracking-[0.2em] uppercase hover:bg-[var(--color-accent-primary)] transition-all duration-300"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             Customize My Trip
@@ -116,41 +118,44 @@ function HeroSection() {
 }
 
 function WhySection() {
+  const { content } = useCMS();
+  const whyData = content.home.why;
+  
   const cards = [
     {
       icon: (
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <path d="M16 4C9.373 4 4 9.373 4 16s5.373 12 12 12 12-5.373 12-12S22.627 4 16 4z" stroke="#8F9E92" strokeWidth="1.5" fill="none"/>
-          <path d="M16 10v6l4 2" stroke="#8F9E92" strokeWidth="1.5" strokeLinecap="round"/>
+          <path d="M16 4C9.373 4 4 9.373 4 16s5.373 12 12 12 12-5.373 12-12S22.627 4 16 4z" stroke="var(--color-accent-secondary)" strokeWidth="1.5" fill="none" />
+          <path d="M16 10v6l4 2" stroke="var(--color-accent-secondary)" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       ),
-      title: "Curated Experiences",
-      description: "Handpicked journeys designed around meaningful experiences rather than generic itineraries. Every stop earns its place in your story.",
+      title: whyData.cards[0].title,
+      description: whyData.cards[0].description,
     },
     {
       icon: (
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <circle cx="16" cy="11" r="5" stroke="#8F9E92" strokeWidth="1.5" fill="none"/>
-          <path d="M6 28c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="#8F9E92" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+          <circle cx="16" cy="11" r="5" stroke="var(--color-accent-secondary)" strokeWidth="1.5" fill="none" />
+          <path d="M6 28c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="var(--color-accent-secondary)" strokeWidth="1.5" strokeLinecap="round" fill="none" />
         </svg>
       ),
-      title: "Local Experts",
-      description: "Insights from people who truly know every destination — not just the famous landmarks, but the lanes, the flavours, the people behind the place.",
+      title: whyData.cards[1].title,
+      description: whyData.cards[1].description,
     },
     {
       icon: (
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <rect x="5" y="8" width="22" height="16" rx="2" stroke="#8F9E92" strokeWidth="1.5" fill="none"/>
-          <path d="M11 8V6M21 8V6M5 14h22" stroke="#8F9E92" strokeWidth="1.5" strokeLinecap="round"/>
+          <rect x="5" y="8" width="22" height="16" rx="2" stroke="var(--color-accent-secondary)" strokeWidth="1.5" fill="none" />
+          <path d="M11 8V6M21 8V6M5 14h22" stroke="var(--color-accent-secondary)" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       ),
-      title: "Seamless Planning",
-      description: "From the first conversation to the final farewell, every logistical detail is handled with quiet precision so your mind stays free.",
+      title: whyData.cards[2].title,
+      description: whyData.cards[2].description,
     },
   ];
 
   return (
-    <section className="bg-[#FAF8F4] py-28 px-6 lg:px-10">
+    <section className="bg-[var(--color-bg)] py-28 px-6 lg:px-10">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial="hidden"
@@ -162,22 +167,22 @@ function WhySection() {
           <motion.p
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="text-[11px] tracking-[0.35em] uppercase text-[#8F9E92] mb-4"
+            className="text-[11px] tracking-[0.35em] uppercase text-[var(--color-accent-secondary)] mb-4"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            Why Route Story
+            {whyData.subtitle}
           </motion.p>
           <motion.h2
             variants={fadeUp}
             transition={{ duration: 0.7 }}
-            className="text-[#2D2D2D] max-w-2xl mx-auto"
+            className="text-[var(--color-text-primary)] max-w-2xl mx-auto"
             style={{
               fontFamily: "'Playfair Display', serif",
               fontWeight: 700,
               fontSize: "clamp(2rem, 4vw, 3rem)",
             }}
           >
-            Travel Designed Around You, Not a Catalogue
+            {whyData.title}
           </motion.h2>
         </motion.div>
 
@@ -186,26 +191,26 @@ function WhySection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
           variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#E8EBEC]"
+          className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--color-bg-light)]"
         >
           {cards.map((card) => (
             <motion.div
               key={card.title}
               variants={fadeUp}
               transition={{ duration: 0.7 }}
-              className="group bg-[#FAF8F4] p-10 hover:bg-[#2D2D2D] transition-all duration-500 cursor-default"
+              className="group bg-[var(--color-bg)] p-10 hover:bg-[var(--color-text-primary)] transition-all duration-500 cursor-default"
             >
-              <div className="mb-8 group-hover:[&_path]:stroke-[#D8C7A1] group-hover:[&_circle]:stroke-[#D8C7A1] group-hover:[&_rect]:stroke-[#D8C7A1] transition-colors duration-500">
+              <div className="mb-8 group-hover:[&_path]:stroke-[var(--color-accent-primary)] group-hover:[&_circle]:stroke-[var(--color-accent-primary)] group-hover:[&_rect]:stroke-[var(--color-accent-primary)] transition-colors duration-500">
                 {card.icon}
               </div>
               <h3
-                className="text-[#2D2D2D] group-hover:text-white mb-4 transition-colors duration-500"
+                className="text-[var(--color-text-primary)] group-hover:text-white mb-4 transition-colors duration-500"
                 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 600, fontSize: "1.3rem" }}
               >
                 {card.title}
               </h3>
               <p
-                className="text-sm text-[#2D2D2D]/60 group-hover:text-white/60 leading-relaxed transition-colors duration-500"
+                className="text-sm text-[var(--color-text-primary)]/60 group-hover:text-white/60 leading-relaxed transition-colors duration-500"
                 style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 {card.description}
@@ -219,99 +224,203 @@ function WhySection() {
 }
 
 function FeaturedJourneys() {
-  return (
-    <section className="bg-[#E8EBEC] py-28 px-6 lg:px-10">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
-          className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6"
-        >
-          <div>
-            <motion.p
-              variants={fadeUp}
-              transition={{ duration: 0.6 }}
-              className="text-[11px] tracking-[0.35em] uppercase text-[#8F9E92] mb-4"
-              style={{ fontFamily: "'Inter', sans-serif" }}
-            >
-              Featured Journeys
-            </motion.p>
-            <motion.h2
-              variants={fadeUp}
-              transition={{ duration: 0.7 }}
-              className="text-[#2D2D2D]"
-              style={{
-                fontFamily: "'Playfair Display', serif",
-                fontWeight: 700,
-                fontSize: "clamp(2rem, 4vw, 3rem)",
-              }}
-            >
-              Stories Worth Living
-            </motion.h2>
-          </div>
-          <motion.div variants={fadeUp} transition={{ duration: 0.6 }}>
-            <Link
-              to="/experiences"
-              className="group flex items-center gap-2 text-[12px] tracking-[0.2em] uppercase text-[#2D2D2D]/60 hover:text-[#2D2D2D] transition-colors"
-              style={{ fontFamily: "'Inter', sans-serif" }}
-            >
-              View All Journeys
-              <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
-            </Link>
-          </motion.div>
-        </motion.div>
+  const { content } = useCMS();
+  const featuredData = content.home.featuredJourneys;
+  const featuredJourneys = content.featuredJourneysData;
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-          className="grid grid-cols-2 md:grid-cols-3 gap-3"
-        >
-          {featuredJourneys.map((j, i) => (
+  const [selectedJourney, setSelectedJourney] = useState<typeof featuredJourneys[0] | null>(null);
+
+  return (
+    <>
+      <section className="bg-[var(--color-bg-light)] py-28 px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
+            className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6"
+          >
+            <div>
+              <motion.p
+                variants={fadeUp}
+                transition={{ duration: 0.6 }}
+                className="text-[11px] tracking-[0.35em] uppercase text-[var(--color-accent-secondary)] mb-4"
+                style={{ fontFamily: "'Inter', sans-serif" }}
+              >
+                {featuredData.subtitle}
+              </motion.p>
+              <motion.h2
+                variants={fadeUp}
+                transition={{ duration: 0.7 }}
+                className="text-[var(--color-text-primary)]"
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontWeight: 700,
+                  fontSize: "clamp(2rem, 4vw, 3rem)",
+                }}
+              >
+                {featuredData.title}
+              </motion.h2>
+            </div>
+            <motion.div variants={fadeUp} transition={{ duration: 0.6 }}>
+              <Link
+                to="/experiences"
+                className="group flex items-center gap-2 text-[12px] tracking-[0.2em] uppercase text-[var(--color-text-primary)]/60 hover:text-[var(--color-text-primary)] transition-colors"
+                style={{ fontFamily: "'Inter', sans-serif" }}
+              >
+                View All Journeys
+                <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
+              </Link>
+            </motion.div>
+          </motion.div>
+
+          {/* Structural Grid Layout (Perfect Rectangle on all screens) */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+            className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 auto-rows-[60px] sm:auto-rows-[80px] md:auto-rows-[100px] lg:auto-rows-[130px] grid-flow-row-dense"
+          >
+            {featuredJourneys.map((j, i) => {
+              // Perfectly crafted spans to fill an 8-row x 3-column grid without gaps
+              // Total 24 row units. 
+              const spanClass = 
+                i === 0 ? "row-span-3" : // c1
+                i === 1 ? "row-span-2" : // c2
+                i === 2 ? "row-span-2" : // c3
+                i === 3 ? "row-span-2" : // c2 (Sacred Ganges - shorter)
+                i === 4 ? "row-span-4" : // c3 (Tall)
+                i === 5 ? "row-span-2" : // c1
+                i === 6 ? "row-span-2" : // c2
+                i === 7 ? "row-span-3" : // c1
+                i === 8 ? "row-span-2" : // c2
+                i === 9 ? "row-span-2" : // c3
+                "row-span-2";
+
+              return (
+                <motion.div
+                  key={j.id}
+                  variants={fadeUp}
+                  transition={{ duration: 0.7 }}
+                  onClick={() => setSelectedJourney(j)}
+                  className={`group relative overflow-hidden cursor-pointer w-full bg-[var(--color-text-primary)] ${spanClass}`}
+                >
+                  <img
+                    src={j.image}
+                    alt={j.title}
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-6 lg:p-8">
+                    <p
+                      className="text-[6px] sm:text-[8px] md:text-[10px] tracking-[0.1em] sm:tracking-[0.3em] uppercase text-[var(--color-accent-primary)] mb-1 sm:mb-2 font-medium truncate"
+                      style={{ fontFamily: "'Inter', sans-serif" }}
+                    >
+                      {j.category} · {j.duration}
+                    </p>
+                    <h3
+                      className="text-white tracking-wide text-sm sm:text-base md:text-xl lg:text-[1.4rem] leading-tight"
+                      style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
+                    >
+                      {j.title}
+                    </h3>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Information Modal */}
+      <AnimatePresence>
+        {selectedJourney && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center px-4 py-10">
             <motion.div
-              key={j.id}
-              variants={fadeUp}
-              transition={{ duration: 0.7 }}
-              className={`group relative overflow-hidden cursor-pointer ${
-                i === 0 || i === 3 ? "row-span-2 aspect-[3/4]" : "aspect-[4/3]"
-              }`}
-              style={{ minHeight: i === 0 || i === 3 ? "400px" : "200px" }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer"
+              onClick={() => setSelectedJourney(null)}
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full max-w-5xl bg-[var(--color-bg)] flex flex-col md:flex-row overflow-hidden shadow-2xl z-10"
+              style={{ maxHeight: "90vh" }}
             >
-              <img
-                src={j.image}
-                alt={j.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6">
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedJourney(null)}
+                className="absolute top-4 right-4 z-20 w-10 h-10 bg-white/10 hover:bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-colors"
+              >
+                <X size={20} className="text-[var(--color-text-primary)] md:text-white" />
+              </button>
+
+              {/* Image Half */}
+              <div className="w-full md:w-1/2 h-64 md:h-auto relative">
+                <img
+                  src={selectedJourney.image}
+                  alt={selectedJourney.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Content Half */}
+              <div className="w-full md:w-1/2 p-10 md:p-16 flex flex-col justify-center bg-[var(--color-bg)] overflow-y-auto">
                 <p
-                  className="text-[10px] tracking-[0.3em] uppercase text-[#D8C7A1] mb-2"
+                  className="text-[11px] tracking-[0.3em] uppercase text-[var(--color-accent-secondary)] mb-4"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
-                  {j.category} · {j.duration}
+                  {selectedJourney.category} · {selectedJourney.duration}
                 </p>
-                <h3
-                  className="text-white"
-                  style={{ fontFamily: "'Playfair Display', serif", fontWeight: 600, fontSize: "1.1rem" }}
+                <h2
+                  className="text-[var(--color-text-primary)] mb-8"
+                  style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: "2.5rem", lineHeight: 1.1 }}
                 >
-                  {j.title}
-                </h3>
+                  {selectedJourney.title}
+                </h2>
+                
+                <div className="w-12 h-px bg-[var(--color-accent-primary)] mb-8" />
+
+                <p
+                  className="text-[var(--color-text-primary)]/70 text-[15px] leading-relaxed mb-10"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                >
+                  Embark on a beautifully curated {selectedJourney.duration.toLowerCase()} journey focusing on the essence of {selectedJourney.category.toLowerCase()}. 
+                  This signature route is designed to immerse you deeply in the local culture, landscape, and untold stories of the region.
+                  Every day unfolds a new chapter, carefully balanced with exploration and luxurious tranquility.
+                </p>
+
+                <div className="mt-auto pt-8 border-t border-[var(--color-text-primary)]/10">
+                  <Link
+                    to="/contact"
+                    className="group inline-flex items-center gap-3 bg-[var(--color-text-primary)] text-white px-8 py-4 text-[11px] tracking-[0.2em] uppercase hover:bg-[var(--color-accent-primary)] hover:text-[var(--color-text-primary)] transition-all duration-300"
+                    style={{ fontFamily: "'Inter', sans-serif" }}
+                  >
+                    Enquire About This Journey
+                    <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
               </div>
-              <div className="absolute inset-0 border border-transparent group-hover:border-white/20 transition-all duration-500" />
             </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
+          </div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
 function OurStorySection() {
+  const { content } = useCMS();
+  const storyData = content.home.ourStory;
+
   return (
-    <section className="bg-[#FAF8F4] py-28 px-6 lg:px-10">
+    <section className="bg-[var(--color-bg)] py-28 px-6 lg:px-10">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
         {/* Image */}
         <motion.div
@@ -323,14 +432,14 @@ function OurStorySection() {
         >
           <div className="relative overflow-hidden aspect-[4/5]">
             <img
-              src="https://images.unsplash.com/photo-1561361058-c24cecae35ca?w=800&h=1000&fit=crop&auto=format"
-              alt="Varanasi ghats at dawn"
+              src={storyData.image}
+              alt="Our Story"
               className="w-full h-full object-cover"
             />
           </div>
           {/* Decorative offset box */}
-          <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-[#D8C7A1]/30 -z-10" />
-          <div className="absolute -top-6 -left-6 w-32 h-32 border border-[#8F9E92]/30 -z-10" />
+          <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-[var(--color-accent-primary)]/30 -z-10" />
+          <div className="absolute -top-6 -left-6 w-32 h-32 border border-[var(--color-accent-secondary)]/30 -z-10" />
         </motion.div>
 
         {/* Content */}
@@ -343,15 +452,15 @@ function OurStorySection() {
           <motion.p
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="text-[11px] tracking-[0.35em] uppercase text-[#8F9E92] mb-6"
+            className="text-[11px] tracking-[0.35em] uppercase text-[var(--color-accent-secondary)] mb-6"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            Our Story
+            {storyData.subtitle}
           </motion.p>
           <motion.h2
             variants={fadeUp}
             transition={{ duration: 0.7 }}
-            className="text-[#2D2D2D] mb-8"
+            className="text-[var(--color-text-primary)] mb-8"
             style={{
               fontFamily: "'Playfair Display', serif",
               fontWeight: 700,
@@ -359,30 +468,30 @@ function OurStorySection() {
               lineHeight: 1.15,
             }}
           >
-            Travel Is Not a Transaction.
+            {storyData.title1}
             <br />
-            <em>It Is a Transformation.</em>
+            <em>{storyData.title2}</em>
           </motion.h2>
           <motion.p
             variants={fadeUp}
             transition={{ duration: 0.7 }}
-            className="text-[#2D2D2D]/65 leading-relaxed mb-6 text-[15px]"
+            className="text-[var(--color-text-primary)]/65 leading-relaxed mb-6 text-[15px]"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            We started Route Story because we believed the travel industry had forgotten something essential — that the point of a journey is not to arrive somewhere new, but to return home changed.
+            {storyData.p1}
           </motion.p>
           <motion.p
             variants={fadeUp}
             transition={{ duration: 0.7 }}
-            className="text-[#2D2D2D]/65 leading-relaxed mb-10 text-[15px]"
+            className="text-[var(--color-text-primary)]/65 leading-relaxed mb-10 text-[15px]"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            India has an extraordinary gift for transformation. Its mountains silence you. Its deserts humble you. Its ancient cities remind you how briefly you exist. Our job is simply to make space for that encounter.
+            {storyData.p2}
           </motion.p>
           <motion.div variants={fadeUp} transition={{ duration: 0.6 }}>
             <Link
               to="/about"
-              className="group inline-flex items-center gap-3 text-[12px] tracking-[0.2em] uppercase text-[#2D2D2D] border-b border-[#2D2D2D]/30 pb-1 hover:border-[#2D2D2D] transition-colors duration-300"
+              className="group inline-flex items-center gap-3 text-[12px] tracking-[0.2em] uppercase text-[var(--color-text-primary)] border-b border-[var(--color-text-primary)]/30 pb-1 hover:border-[var(--color-text-primary)] transition-colors duration-300"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               Read Our Full Story
@@ -396,6 +505,10 @@ function OurStorySection() {
 }
 
 function TestimonialsSection() {
+  const { content } = useCMS();
+  const testData = content.home.testimonials;
+  const testimonials = content.testimonialsData;
+
   const [current, setCurrent] = useState(0);
   const total = testimonials.length;
 
@@ -403,16 +516,16 @@ function TestimonialsSection() {
   const next = () => setCurrent((c) => (c + 1) % total);
 
   return (
-    <section className="bg-[#2D2D2D] py-28 px-6 lg:px-10 overflow-hidden">
+    <section className="bg-[var(--color-text-primary)] py-28 px-6 lg:px-10 overflow-hidden">
       <div className="max-w-4xl mx-auto">
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-[11px] tracking-[0.35em] uppercase text-[#8F9E92] text-center mb-16"
+          className="text-[11px] tracking-[0.35em] uppercase text-[var(--color-accent-secondary)] text-center mb-16"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
-          Traveller Stories
+          {testData.subtitle}
         </motion.p>
 
         <div className="relative min-h-[260px] flex items-center">
@@ -426,11 +539,10 @@ function TestimonialsSection() {
               <button
                 key={i}
                 onClick={() => setCurrent(i)}
-                className={`transition-all duration-300 ${
-                  i === current
-                    ? "w-8 h-px bg-[#D8C7A1]"
+                className={`transition-all duration-300 ${i === current
+                    ? "w-8 h-px bg-[var(--color-accent-primary)]"
                     : "w-4 h-px bg-white/20 hover:bg-white/40"
-                }`}
+                  }`}
               />
             ))}
           </div>
@@ -474,7 +586,7 @@ function AnimatedTestimonial({ testimonial }: { testimonial: typeof testimonials
         "{testimonial.quote}"
       </p>
       <p
-        className="text-[#D8C7A1] text-[13px] tracking-wider"
+        className="text-[var(--color-accent-primary)] text-[13px] tracking-wider"
         style={{ fontFamily: "'Inter', sans-serif" }}
       >
         {testimonial.author}
@@ -490,14 +602,17 @@ function AnimatedTestimonial({ testimonial }: { testimonial: typeof testimonials
 }
 
 function CTASection() {
+  const { content } = useCMS();
+  const ctaData = content.home.cta;
+
   return (
     <section className="relative py-40 px-6 overflow-hidden">
       <img
-        src="https://images.unsplash.com/photo-1469521669194-babb45599def?w=1800&h=800&fit=crop&auto=format"
-        alt="Himalayan landscape"
+        src={ctaData.image}
+        alt="CTA Background"
         className="absolute inset-0 w-full h-full object-cover"
       />
-      <div className="absolute inset-0 bg-[#2D2D2D]/75" />
+      <div className="absolute inset-0 bg-[var(--color-text-primary)]/75" />
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -508,10 +623,10 @@ function CTASection() {
         <motion.p
           variants={fadeUp}
           transition={{ duration: 0.6 }}
-          className="text-[11px] tracking-[0.35em] uppercase text-[#D8C7A1] mb-6"
+          className="text-[11px] tracking-[0.35em] uppercase text-[var(--color-accent-primary)] mb-6"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
-          Begin Here
+          {ctaData.subtitle}
         </motion.p>
         <motion.h2
           variants={fadeUp}
@@ -524,7 +639,7 @@ function CTASection() {
             lineHeight: 1.1,
           }}
         >
-          Let's Create Your Next Story
+          {ctaData.title}
         </motion.h2>
         <motion.p
           variants={fadeUp}
@@ -532,12 +647,12 @@ function CTASection() {
           className="text-white/60 mb-12 text-[15px] leading-relaxed"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
-          Tell us what you dream of — and we will craft the journey around it.
+          {ctaData.description}
         </motion.p>
         <motion.div variants={fadeUp} transition={{ duration: 0.6 }}>
           <Link
             to="/contact"
-            className="group inline-flex items-center gap-3 bg-[#D8C7A1] text-[#2D2D2D] px-10 py-5 text-[12px] tracking-[0.25em] uppercase hover:bg-white transition-all duration-300"
+            className="group inline-flex items-center gap-3 bg-[var(--color-accent-primary)] text-[var(--color-text-primary)] px-10 py-5 text-[12px] tracking-[0.25em] uppercase hover:bg-white transition-all duration-300"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             Plan My Journey

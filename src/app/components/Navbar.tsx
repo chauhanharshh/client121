@@ -6,17 +6,21 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/destinations", label: "Destinations" },
-  { href: "/experiences", label: "Experiences" },
+  { href: "/experiences", label: "Reviews" },
   { href: "/customize", label: "Customize Trip" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
+
+import { useCMS } from "../context/CMSContext";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === "/";
+  const { content } = useCMS();
+  const globalData = content.global;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -36,7 +40,7 @@ export function Navbar() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         transparent
           ? "bg-transparent"
-          : "bg-[#FAF8F4]/95 backdrop-blur-md border-b border-black/8 shadow-sm"
+          : "bg-[var(--color-bg)]/95 backdrop-blur-md border-b border-black/8 shadow-sm"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -45,19 +49,19 @@ export function Navbar() {
           <Link to="/" className="flex flex-col leading-none group">
             <span
               className={`text-xl tracking-widest uppercase transition-colors duration-300 ${
-                transparent ? "text-white" : "text-[#2D2D2D]"
+                transparent ? "text-white" : "text-[var(--color-text-primary)]"
               }`}
               style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
             >
-              Route Story
+              {globalData.logoText}
             </span>
             <span
               className={`text-[10px] tracking-[0.3em] uppercase mt-0.5 transition-colors duration-300 ${
-                transparent ? "text-white/60" : "text-[#8F9E92]"
+                transparent ? "text-white/60" : "text-[var(--color-accent-secondary)]"
               }`}
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
-              Every Journey Has a Story
+              {globalData.logoSubtext}
             </span>
           </Link>
 
@@ -68,13 +72,13 @@ export function Navbar() {
                 key={link.href}
                 to={link.href}
                 className={`text-[13px] tracking-[0.15em] uppercase transition-colors duration-300 relative group ${
-                  transparent ? "text-white/80 hover:text-white" : "text-[#2D2D2D]/70 hover:text-[#2D2D2D]"
-                } ${location.pathname === link.href ? (transparent ? "text-white" : "text-[#2D2D2D]") : ""}`}
+                  transparent ? "text-white/80 hover:text-white" : "text-[var(--color-text-primary)]/70 hover:text-[var(--color-text-primary)]"
+                } ${location.pathname === link.href ? (transparent ? "text-white" : "text-[var(--color-text-primary)]") : ""}`}
                 style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 {link.label}
                 <span
-                  className={`absolute -bottom-1 left-0 h-px transition-all duration-300 bg-[#D8C7A1] ${
+                  className={`absolute -bottom-1 left-0 h-px transition-all duration-300 bg-[var(--color-accent-primary)] ${
                     location.pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
                   }`}
                 />
@@ -84,8 +88,8 @@ export function Navbar() {
               to="/contact"
               className={`text-[12px] tracking-[0.2em] uppercase px-5 py-2.5 border transition-all duration-300 ${
                 transparent
-                  ? "border-white/50 text-white hover:bg-white hover:text-[#2D2D2D]"
-                  : "border-[#2D2D2D] text-[#2D2D2D] hover:bg-[#2D2D2D] hover:text-white"
+                  ? "border-white/50 text-white hover:bg-white hover:text-[var(--color-text-primary)]"
+                  : "border-[var(--color-text-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-text-primary)] hover:text-white"
               }`}
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
@@ -96,7 +100,7 @@ export function Navbar() {
           {/* Mobile Toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`md:hidden p-2 transition-colors ${transparent ? "text-white" : "text-[#2D2D2D]"}`}
+            className={`md:hidden p-2 transition-colors ${transparent ? "text-white" : "text-[var(--color-text-primary)]"}`}
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -111,14 +115,14 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-[#FAF8F4] border-t border-black/8 overflow-hidden"
+            className="md:hidden bg-[var(--color-bg)] border-t border-black/8 overflow-hidden"
           >
             <div className="px-6 py-6 flex flex-col gap-5">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="text-[13px] tracking-[0.2em] uppercase text-[#2D2D2D]/70 hover:text-[#2D2D2D] transition-colors"
+                  className="text-[13px] tracking-[0.2em] uppercase text-[var(--color-text-primary)]/70 hover:text-[var(--color-text-primary)] transition-colors"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
                   {link.label}
@@ -126,7 +130,7 @@ export function Navbar() {
               ))}
               <Link
                 to="/contact"
-                className="text-[12px] tracking-[0.2em] uppercase px-5 py-3 border border-[#2D2D2D] text-[#2D2D2D] text-center mt-2"
+                className="text-[12px] tracking-[0.2em] uppercase px-5 py-3 border border-[var(--color-text-primary)] text-[var(--color-text-primary)] text-center mt-2"
                 style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 Plan Journey

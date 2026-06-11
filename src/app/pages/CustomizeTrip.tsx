@@ -74,13 +74,13 @@ function SelectCard({
       onClick={onClick}
       className={`relative text-left w-full border transition-all duration-300 cursor-pointer ${
         selected
-          ? "border-[#2D2D2D] bg-[#2D2D2D] text-white"
-          : "border-[#E8EBEC] bg-white hover:border-[#2D2D2D]/40"
+          ? "border-[var(--color-text-primary)] bg-[var(--color-text-primary)] text-white"
+          : "border-[var(--color-bg-light)] bg-white hover:border-[var(--color-text-primary)]/40"
       }`}
     >
       {selected && (
-        <div className="absolute top-3 right-3 w-5 h-5 bg-[#D8C7A1] flex items-center justify-center">
-          <Check size={11} className="text-[#2D2D2D]" strokeWidth={2.5} />
+        <div className="absolute top-3 right-3 w-5 h-5 bg-[var(--color-accent-primary)] flex items-center justify-center">
+          <Check size={11} className="text-[var(--color-text-primary)]" strokeWidth={2.5} />
         </div>
       )}
       {children}
@@ -112,13 +112,13 @@ function StepDestination({
           </div>
           <div className="p-4">
             <p
-              className={`text-[13px] mb-1 ${value === opt.value ? "text-white" : "text-[#2D2D2D]"}`}
+              className={`text-[13px] mb-1 ${value === opt.value ? "text-white" : "text-[var(--color-text-primary)]"}`}
               style={{ fontFamily: "'Playfair Display', serif", fontWeight: 600 }}
             >
               {opt.label}
             </p>
             <p
-              className={`text-[11px] leading-relaxed ${value === opt.value ? "text-white/60" : "text-[#2D2D2D]/50"}`}
+              className={`text-[11px] leading-relaxed ${value === opt.value ? "text-white/60" : "text-[var(--color-text-primary)]/50"}`}
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               {opt.desc}
@@ -143,7 +143,7 @@ function StepExperiences({
   return (
     <div>
       <p
-        className="text-[12px] text-[#8F9E92] mb-6 tracking-wide"
+        className="text-[12px] text-[var(--color-accent-secondary)] mb-6 tracking-wide"
         style={{ fontFamily: "'Inter', sans-serif" }}
       >
         Select all that resonate — you can choose multiple.
@@ -158,8 +158,8 @@ function StepExperiences({
               onClick={() => toggle(opt.value)}
               className={`flex flex-col items-center gap-3 py-6 px-4 border transition-all duration-300 ${
                 sel
-                  ? "border-[#2D2D2D] bg-[#2D2D2D] text-white"
-                  : "border-[#E8EBEC] bg-white text-[#2D2D2D]/70 hover:border-[#2D2D2D]/40 hover:text-[#2D2D2D]"
+                  ? "border-[var(--color-text-primary)] bg-[var(--color-text-primary)] text-white"
+                  : "border-[var(--color-bg-light)] bg-white text-[var(--color-text-primary)]/70 hover:border-[var(--color-text-primary)]/40 hover:text-[var(--color-text-primary)]"
               }`}
             >
               <span className="text-2xl">{opt.icon}</span>
@@ -170,8 +170,8 @@ function StepExperiences({
                 {opt.label}
               </span>
               {sel && (
-                <div className="w-4 h-4 bg-[#D8C7A1] flex items-center justify-center">
-                  <Check size={9} className="text-[#2D2D2D]" strokeWidth={3} />
+                <div className="w-4 h-4 bg-[var(--color-accent-primary)] flex items-center justify-center">
+                  <Check size={9} className="text-[var(--color-text-primary)]" strokeWidth={3} />
                 </div>
               )}
             </button>
@@ -195,13 +195,13 @@ function StepDuration({
         <SelectCard key={opt.value} selected={value === opt.value} onClick={() => onChange(opt.value)}>
           <div className="p-7">
             <p
-              className={`mb-1 ${value === opt.value ? "text-white" : "text-[#2D2D2D]"}`}
+              className={`mb-1 ${value === opt.value ? "text-white" : "text-[var(--color-text-primary)]"}`}
               style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: "1.6rem" }}
             >
               {opt.label}
             </p>
             <p
-              className={`text-[12px] ${value === opt.value ? "text-white/60" : "text-[#2D2D2D]/50"}`}
+              className={`text-[12px] ${value === opt.value ? "text-white/60" : "text-[var(--color-text-primary)]/50"}`}
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               {opt.desc}
@@ -226,19 +226,19 @@ function StepBudget({
         <SelectCard key={opt.value} selected={value === opt.value} onClick={() => onChange(opt.value)}>
           <div className="p-7">
             <p
-              className={`text-[11px] tracking-[0.25em] uppercase mb-3 ${value === opt.value ? "text-[#D8C7A1]" : "text-[#8F9E92]"}`}
+              className={`text-[11px] tracking-[0.25em] uppercase mb-3 ${value === opt.value ? "text-[var(--color-accent-primary)]" : "text-[var(--color-accent-secondary)]"}`}
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               {opt.label}
             </p>
             <p
-              className={`mb-2 ${value === opt.value ? "text-white" : "text-[#2D2D2D]"}`}
+              className={`mb-2 ${value === opt.value ? "text-white" : "text-[var(--color-text-primary)]"}`}
               style={{ fontFamily: "'Playfair Display', serif", fontWeight: 600, fontSize: "1.1rem" }}
             >
               {opt.desc}
             </p>
             <p
-              className={`text-[12px] ${value === opt.value ? "text-white/55" : "text-[#2D2D2D]/45"}`}
+              className={`text-[12px] ${value === opt.value ? "text-white/55" : "text-[var(--color-text-primary)]/45"}`}
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               {opt.sub}
@@ -264,7 +264,7 @@ function StepTravellers({
           <div className="flex flex-col items-center gap-4 py-8 px-4">
             <span className="text-3xl">{opt.icon}</span>
             <span
-              className={`text-[12px] tracking-wide text-center ${value === opt.value ? "text-white" : "text-[#2D2D2D]/70"}`}
+              className={`text-[12px] tracking-wide text-center ${value === opt.value ? "text-white" : "text-[var(--color-text-primary)]/70"}`}
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               {opt.label}
@@ -285,8 +285,8 @@ function StepDetails({
 }) {
   const set = (key: string, val: string) => onChange({ ...value, [key]: val });
   const inputClass =
-    "w-full bg-transparent border-b border-[#2D2D2D]/20 py-3 text-[14px] text-[#2D2D2D] placeholder-[#2D2D2D]/30 focus:outline-none focus:border-[#2D2D2D] transition-colors";
-  const labelClass = "block text-[11px] tracking-[0.2em] uppercase text-[#2D2D2D]/50 mb-2";
+    "w-full bg-transparent border-b border-[var(--color-text-primary)]/20 py-3 text-[14px] text-[var(--color-text-primary)] placeholder-[var(--color-text-primary)]/30 focus:outline-none focus:border-[var(--color-text-primary)] transition-colors";
+  const labelClass = "block text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-primary)]/50 mb-2";
 
   return (
     <div className="max-w-2xl space-y-8">
@@ -393,9 +393,9 @@ function Summary({
   if (!rows.length) return null;
 
   return (
-    <div className="bg-[#2D2D2D] p-6 sticky top-28">
+    <div className="bg-[var(--color-text-primary)] p-6 sticky top-28">
       <p
-        className="text-[10px] tracking-[0.3em] uppercase text-[#8F9E92] mb-5"
+        className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-accent-secondary)] mb-5"
         style={{ fontFamily: "'Inter', sans-serif" }}
       >
         Your Journey So Far
@@ -436,15 +436,15 @@ function SuccessScreen() {
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-        className="w-20 h-20 border border-[#8F9E92] flex items-center justify-center mx-auto mb-10"
+        className="w-20 h-20 border border-[var(--color-accent-secondary)] flex items-center justify-center mx-auto mb-10"
       >
-        <Check size={28} className="text-[#8F9E92]" strokeWidth={1.5} />
+        <Check size={28} className="text-[var(--color-accent-secondary)]" strokeWidth={1.5} />
       </motion.div>
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.6 }}
-        className="text-[#2D2D2D] mb-4"
+        className="text-[var(--color-text-primary)] mb-4"
         style={{
           fontFamily: "'Playfair Display', serif",
           fontWeight: 700,
@@ -457,7 +457,7 @@ function SuccessScreen() {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.55, duration: 0.6 }}
-        className="text-[#2D2D2D]/55 max-w-md mx-auto text-[15px] leading-relaxed mb-10"
+        className="text-[var(--color-text-primary)]/55 max-w-md mx-auto text-[15px] leading-relaxed mb-10"
         style={{ fontFamily: "'Inter', sans-serif" }}
       >
         We've received your preferences and will reach out within 24 hours with a hand-crafted journey proposal — just for you.
@@ -469,7 +469,7 @@ function SuccessScreen() {
       >
         <Link
           to="/"
-          className="group inline-flex items-center gap-3 bg-[#2D2D2D] text-white px-8 py-4 text-[12px] tracking-[0.2em] uppercase hover:bg-[#D8C7A1] hover:text-[#2D2D2D] transition-all duration-300"
+          className="group inline-flex items-center gap-3 bg-[var(--color-text-primary)] text-white px-8 py-4 text-[12px] tracking-[0.2em] uppercase hover:bg-[var(--color-accent-primary)] hover:text-[var(--color-text-primary)] transition-all duration-300"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           Back to Home
@@ -530,7 +530,7 @@ export default function CustomizeTrip() {
       />
 
       {/* Hero strip */}
-      <section className="relative pt-28 pb-14 px-6 lg:px-10 bg-[#2D2D2D] overflow-hidden">
+      <section className="relative pt-28 pb-14 px-6 lg:px-10 bg-[var(--color-text-primary)] overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <img
             src="https://images.unsplash.com/photo-1469521669194-babb45599def?w=1800&h=400&fit=crop&auto=format"
@@ -547,7 +547,7 @@ export default function CustomizeTrip() {
           <motion.p
             variants={fadeUp}
             transition={{ duration: 0.5 }}
-            className="text-[11px] tracking-[0.35em] uppercase text-[#8F9E92] mb-4"
+            className="text-[11px] tracking-[0.35em] uppercase text-[var(--color-accent-secondary)] mb-4"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             Bespoke Journeys
@@ -565,13 +565,13 @@ export default function CustomizeTrip() {
           >
             Design Your Perfect
             <br />
-            <em className="text-[#D8C7A1]">Indian Journey</em>
+            <em className="text-[var(--color-accent-primary)]">Indian Journey</em>
           </motion.h1>
         </motion.div>
       </section>
 
       {/* Progress bar */}
-      <div className="bg-[#FAF8F4] border-b border-[#E8EBEC] sticky top-[72px] z-30">
+      <div className="bg-[var(--color-bg)] border-b border-[var(--color-bg-light)] sticky top-[72px] z-30">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="flex items-center gap-0 overflow-x-auto scrollbar-hide py-4">
             {steps.map((s, i) => (
@@ -580,10 +580,10 @@ export default function CustomizeTrip() {
                   onClick={() => i < step && (setDirection(-1), setStep(i))}
                   className={`flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase transition-colors duration-200 ${
                     i === step
-                      ? "text-[#2D2D2D]"
+                      ? "text-[var(--color-text-primary)]"
                       : i < step
-                      ? "text-[#8F9E92] hover:text-[#2D2D2D] cursor-pointer"
-                      : "text-[#2D2D2D]/25 cursor-default"
+                      ? "text-[var(--color-accent-secondary)] hover:text-[var(--color-text-primary)] cursor-pointer"
+                      : "text-[var(--color-text-primary)]/25 cursor-default"
                   }`}
                   style={{ fontFamily: "'Inter', sans-serif" }}
                   disabled={i > step}
@@ -591,10 +591,10 @@ export default function CustomizeTrip() {
                   <span
                     className={`w-5 h-5 flex items-center justify-center text-[10px] transition-colors duration-200 ${
                       i < step
-                        ? "bg-[#8F9E92] text-white"
+                        ? "bg-[var(--color-accent-secondary)] text-white"
                         : i === step
-                        ? "bg-[#2D2D2D] text-white"
-                        : "border border-[#2D2D2D]/20 text-[#2D2D2D]/30"
+                        ? "bg-[var(--color-text-primary)] text-white"
+                        : "border border-[var(--color-text-primary)]/20 text-[var(--color-text-primary)]/30"
                     }`}
                   >
                     {i < step ? <Check size={9} strokeWidth={3} /> : i + 1}
@@ -602,15 +602,15 @@ export default function CustomizeTrip() {
                   {s}
                 </button>
                 {i < steps.length - 1 && (
-                  <div className="w-6 h-px bg-[#E8EBEC] mx-3 flex-shrink-0" />
+                  <div className="w-6 h-px bg-[var(--color-bg-light)] mx-3 flex-shrink-0" />
                 )}
               </div>
             ))}
           </div>
           {/* Thin progress line */}
-          <div className="h-px bg-[#E8EBEC] -mt-1">
+          <div className="h-px bg-[var(--color-bg-light)] -mt-1">
             <motion.div
-              className="h-full bg-[#2D2D2D]"
+              className="h-full bg-[var(--color-text-primary)]"
               animate={{ width: `${((step + 1) / steps.length) * 100}%` }}
               transition={{ duration: 0.4 }}
             />
@@ -619,7 +619,7 @@ export default function CustomizeTrip() {
       </div>
 
       {/* Body */}
-      <section className="bg-[#FAF8F4] py-16 px-6 lg:px-10 min-h-[60vh]">
+      <section className="bg-[var(--color-bg)] py-16 px-6 lg:px-10 min-h-[60vh]">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-12">
             {/* Step content */}
@@ -633,7 +633,7 @@ export default function CustomizeTrip() {
                 <motion.p
                   variants={fadeUp}
                   transition={{ duration: 0.4 }}
-                  className="text-[11px] tracking-[0.3em] uppercase text-[#8F9E92] mb-3"
+                  className="text-[11px] tracking-[0.3em] uppercase text-[var(--color-accent-secondary)] mb-3"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
                   Step {step + 1} of {steps.length}
@@ -641,7 +641,7 @@ export default function CustomizeTrip() {
                 <motion.h2
                   variants={fadeUp}
                   transition={{ duration: 0.5 }}
-                  className="text-[#2D2D2D]"
+                  className="text-[var(--color-text-primary)]"
                   style={{
                     fontFamily: "'Playfair Display', serif",
                     fontWeight: 700,
@@ -675,11 +675,11 @@ export default function CustomizeTrip() {
               </AnimatePresence>
 
               {/* Navigation buttons */}
-              <div className="flex items-center justify-between mt-12 pt-8 border-t border-[#E8EBEC]">
+              <div className="flex items-center justify-between mt-12 pt-8 border-t border-[var(--color-bg-light)]">
                 <button
                   onClick={() => go(-1)}
                   disabled={step === 0}
-                  className="flex items-center gap-2 text-[12px] tracking-[0.2em] uppercase text-[#2D2D2D]/40 hover:text-[#2D2D2D] transition-colors disabled:opacity-0 disabled:pointer-events-none"
+                  className="flex items-center gap-2 text-[12px] tracking-[0.2em] uppercase text-[var(--color-text-primary)]/40 hover:text-[var(--color-text-primary)] transition-colors disabled:opacity-0 disabled:pointer-events-none"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
                   <ArrowLeft size={13} />
@@ -690,7 +690,7 @@ export default function CustomizeTrip() {
                   <button
                     onClick={() => go(1)}
                     disabled={!canNext[step]}
-                    className="group flex items-center gap-3 bg-[#2D2D2D] text-white px-8 py-4 text-[12px] tracking-[0.2em] uppercase hover:bg-[#D8C7A1] hover:text-[#2D2D2D] transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-[#2D2D2D] disabled:hover:text-white"
+                    className="group flex items-center gap-3 bg-[var(--color-text-primary)] text-white px-8 py-4 text-[12px] tracking-[0.2em] uppercase hover:bg-[var(--color-accent-primary)] hover:text-[var(--color-text-primary)] transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-[var(--color-text-primary)] disabled:hover:text-white"
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
                     Continue
@@ -700,7 +700,7 @@ export default function CustomizeTrip() {
                   <button
                     onClick={handleSubmit}
                     disabled={!canNext[step]}
-                    className="group flex items-center gap-3 bg-[#D8C7A1] text-[#2D2D2D] px-8 py-4 text-[12px] tracking-[0.2em] uppercase hover:bg-[#2D2D2D] hover:text-white transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
+                    className="group flex items-center gap-3 bg-[var(--color-accent-primary)] text-[var(--color-text-primary)] px-8 py-4 text-[12px] tracking-[0.2em] uppercase hover:bg-[var(--color-text-primary)] hover:text-white transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
                     Submit My Journey

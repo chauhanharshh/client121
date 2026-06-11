@@ -138,7 +138,7 @@ export const experiences = [
     title: "High-Altitude Expeditions",
     description: "Trek across Himalayan passes, cycle through remote Spiti, or raft the Zanskar in its icy prime.",
     image: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=900&h=700&fit=crop&auto=format",
-    accent: "#8F9E92",
+    accent: "var(--color-accent-secondary)",
   },
   {
     id: 2,
@@ -146,7 +146,7 @@ export const experiences = [
     title: "Living History Journeys",
     description: "Walk through royal palaces, witness centuries-old craft traditions, and dine with local nobility.",
     image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=900&h=700&fit=crop&auto=format",
-    accent: "#D8C7A1",
+    accent: "var(--color-accent-primary)",
   },
   {
     id: 3,
@@ -154,7 +154,7 @@ export const experiences = [
     title: "Wilderness Encounters",
     description: "Tiger safaris at dawn, elephant corridors at dusk, and birding in ancient forests.",
     image: "https://images.unsplash.com/photo-1544535830-9df3f56fff6a?w=900&h=700&fit=crop&auto=format",
-    accent: "#8F9E92",
+    accent: "var(--color-accent-secondary)",
   },
   {
     id: 4,
@@ -162,7 +162,7 @@ export const experiences = [
     title: "Palace & Heritage Hotels",
     description: "Sleep in converted maharaja forts, wake up to courtyard fountains, and be waited on by white-gloved staff.",
     image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&h=700&fit=crop&auto=format",
-    accent: "#D8C7A1",
+    accent: "var(--color-accent-primary)",
   },
   {
     id: 5,
@@ -170,7 +170,7 @@ export const experiences = [
     title: "Sacred Circuits",
     description: "Char Dham, Vaishno Devi, the twelve Jyotirlingas — journeys that transcend geography.",
     image: "https://images.unsplash.com/photo-1561361058-c24cecae35ca?w=900&h=700&fit=crop&auto=format",
-    accent: "#8F9E92",
+    accent: "var(--color-accent-secondary)",
   },
   {
     id: 6,
@@ -178,7 +178,7 @@ export const experiences = [
     title: "Legendary Road Journeys",
     description: "Manali to Leh, the Konkan coastline, the NH44 from Srinagar to Kanyakumari.",
     image: "https://images.unsplash.com/photo-1469521669194-babb45599def?w=900&h=700&fit=crop&auto=format",
-    accent: "#D8C7A1",
+    accent: "var(--color-accent-primary)",
   },
   {
     id: 7,
@@ -186,7 +186,7 @@ export const experiences = [
     title: "Romantic Hideaways",
     description: "Private houseboat sunsets on Kerala's backwaters, candlelit dinners in Udaipur's lake palaces.",
     image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&h=700&fit=crop&auto=format",
-    accent: "#D8C7A1",
+    accent: "var(--color-accent-primary)",
   },
   {
     id: 8,
@@ -194,7 +194,7 @@ export const experiences = [
     title: "Journeys for Every Generation",
     description: "Cultural immersion, wildlife thrills, and beach play — itineraries that delight everyone.",
     image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=900&h=700&fit=crop&auto=format",
-    accent: "#8F9E92",
+    accent: "var(--color-accent-secondary)",
   },
 ];
 
@@ -240,6 +240,34 @@ export const featuredJourneys = [
     category: "Adventure",
     duration: "14 Days",
     image: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=700&h=900&fit=crop&auto=format",
+  },
+  {
+    id: 7,
+    title: "The Golden Triangle",
+    category: "Heritage",
+    duration: "6 Days",
+    image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=700&h=900&fit=crop&auto=format",
+  },
+  {
+    id: 8,
+    title: "Spiti Valley Expedition",
+    category: "Mountains",
+    duration: "10 Days",
+    image: "https://images.unsplash.com/photo-1544015759-237f57b15e11?w=700&h=900&fit=crop&auto=format",
+  },
+  {
+    id: 9,
+    title: "Andaman Blue Waters",
+    category: "Coastal",
+    duration: "8 Days",
+    image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=700&h=900&fit=crop&auto=format",
+  },
+  {
+    id: 10,
+    title: "Rann of Kutch Canvas",
+    category: "Adventure",
+    duration: "5 Days",
+    image: "https://images.unsplash.com/photo-1549880338-65ddcdfd017b?w=700&h=900&fit=crop&auto=format",
   },
 ];
 
